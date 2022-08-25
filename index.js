@@ -1,3 +1,4 @@
+// JSON OF SUPERHEROES
 let superheroes = '{ "superheroes" : [' +
 '{"picture": "https://n1s1.hsmedia.ru/13/a5/b2/13a5b2373d5e23489d9a4949ada5b927/547x397_0xac120002_8752067681540468870.jpg", "name": "Бэтмен", "universe": "Вселенная: DC Comics", "alter": "Альтер эго: Брюс Уэйн", "occupation": "Род деятельности: борец с преступностью, филантроп, миллиардер", "friends": "Друзья: Робин, Бэтгерл", "superpowers": "Суперсилы: интеллект, обширные познания, знания боевых искусств, ловкость", "description": "Подробнее: по популярности человек-летучая мышь может сравниться только с Суперменом. Его образ кажется очень мистическим и мрачным: черный костюм с развевающимся плащом, устрашающий Бэтмобиль, штаб-квартира в сырой пещере. Его биография настолько же темна, как и образ. В детстве у него на глазах убили родителей, и юный Брюс поклялся всеми силами защищать родной Готэм от преступности. Брюс знаменит, несмотря на пожилой возраст: первый выпуск с его участием вышел аж в 1939 году. С каждым годом популярность только крепнет. Большую роль в этом сыграли экранизации: «Темный рыцарь», сериал «Готэм» и несколько одноименных картин. Главная причина такой любви среди фанатов — мысль, что каждый может стать Бэтменом."}, ' +
 '{"picture": "https://n1s1.hsmedia.ru/06/d3/73/06d37321618034ec5f2a65b09c8576e3/547x397_0xac120002_45567661540468871.jpg", "name": "Супермен", "universe": "Вселенная: DC Comics", "alter": "Альтер эго: Кларк Кент", "occupation": "Род деятельности: борец за справедливость", "friends": "Друзья: собака Крипто", "superpowers": "Суперсилы: непробиваемость, суперсила, полет, самоисцеление, суперзрение и суперслух, классный костюм", "description": "Подробнее: полная противоположность своему противнику Бэтмену. Если Брюс Уэйн был простым человеком и стал героем, то Супермен героем родился, но вынужден был изображать выходца из бедной канзасской семьи. Последний представитель планеты Криптон был отправлен на Землю прямо перед тем, как его родина была уничтожена. Супермен — некий хамелеон от мира комиксов. В своем первом выпуске в 1938 году он был просто человек-огромный мускул, который умел только разбивать стены и выбивать двери. Позднее к его умениям добавилась способность летать. Дальше у многочисленных воплощений Кларка, от подростка в «Тайнах Смоллвиля» до величественного «Человека из стали», разный уровень и количество суперспособностей. Неизменным остается его слабое место — уязвимость к Криптониту, радиоактивному веществу с родной планеты."}, ' +
@@ -11,6 +12,7 @@ let superheroes = '{ "superheroes" : [' +
 '{"picture": "https://n1s1.hsmedia.ru/34/93/39/3493392c94fc2ae0552ef9c7e87f2617/728x382_1_cc2a743fd686b7b2e256c062966bb465@1034x543_0xac120002_2692921231540468872.jpg", "name": "Дэдпул", "universe": "Вселенная: Marvel Comics", "alter": "Альтер эго: Уэйд Уинстон Уилсон", "occupation": "Род деятельности: антигерой, наемник", "friends": "Друзья: частично Мстители, Человек-паук, Росомаха", "superpowers": "Суперсилы: высокий болевой порог, регенерация и бессмертие, сверхчеловеческая иммунная система", "description": "Подробнее: как и Росомаха из Людей Икс, Дэдпул был подвергнут опытам по программе «Оружие Икс». Ученые попытались исцелить его рак, привив его клеткам способность к регенерации. Как и всегда в комиксах, что-то пошло не так, и Дэдпул остался изуродованным и психически нестабильным. Это единственный супергерой из списка, который однозначно не на стороне добра. Дэдпул наслаждается насилием. Первоначально появившись в основной Вселенной Marvel, он получил альтернативные варианты в других реальностях Мультивселенной. Что оставалось неизменным — его циничное, черное чувство юмора: за него Дэдпула прозвали «Болтливым наемником»."} ]}';
 
 let superheroesArray = JSON.parse(superheroes);
+let ratings = [];
 
 let title = document.createElement("h1");
 title.textContent = "Все, что надо знать о 10 крутейших супергероях";
@@ -19,22 +21,36 @@ let div = document.createElement("div");
 div.classList.add("container");
 document.body.append(div);
 
-function getHeroInfo() {
-    for(let i = 0; i < superheroesArray.superheroes.length; i++) {
+function getHeroInfoAndSetRating() {
+    for(let i = 0; i < 10; i++) {
+        let box = document.createElement("div");
+        box.classList.add("box" + i);
+        document.querySelector(".container").appendChild(box);
         let img = document.createElement("img");
         img.classList.add("picture");
         let item = document.createElement("div");
+        let rating = document.createElement("form");
+        rating.innerHTML += `<div><p>поставьте рейтинг по шкале от 1 до 10:</p><input type="radio" name=${i} id="rat1" value="rating1"><label for="rat1"></label><input type="radio" name=${i} id="rat2" value="rating2"><label for="rat2"></label><input  type="radio" name=${i} id="rat3" value="rating3"><label for="rat3"></label><input type="radio" name=${i} id="rat4" value="rating4"><label for="rat4"></label><input type="radio" name=${i} id="rat5" value="rating5"><label for="rat5"></label><input type="radio" name=${i} id="rat6" value="rating6"><label for="rat6"></label><input type="radio" name=${i} id="rat7" value="rating7"><label for="rat7"></label><input type="radio" name=${i} id="rat8" value="rating8"><label for="rat8"></label><input type="radio" name=${i} id="rat9" value="rating9"><label for="rat9"></label><input type="radio" name=${i} id="rat10" value="rating10"><label for="rat10"></label></div><div><button class=button${i} type="submit">Поставить рейтинг</button></div>`;
         img.src += superheroesArray.superheroes[i].picture;
         item.innerHTML += superheroesArray.superheroes[i].name + "</br>" + superheroesArray.superheroes[i].universe + "</br>" + superheroesArray.superheroes[i].alter + "</br>" + superheroesArray.superheroes[i].occupation + "</br>" + superheroesArray.superheroes[i].friends + "</br>" + superheroesArray.superheroes[i].superpowers + "</br>" + superheroesArray.superheroes[i].description + "</br>";
-        document.querySelector(".container").append(img);
-        document.querySelector(".container").append(item); 
+        document.querySelector(".box" + i).appendChild(img);
+        document.querySelector(".box" + i).appendChild(item); 
+        document.querySelector(".box" + i).appendChild(rating);
+        let form = document.querySelector(".button" + i);
+        form.addEventListener("click", function(event) {
+        event.preventDefault();
+        let ratingGiven = document.querySelectorAll("input[name=" + "'" + i + "'" + "]");
+        for (let n of ratingGiven) {
+            if (n.checked) {
+            console.log(n.value);
+            ratings.push(n.value);
+            localStorage.setItem("rating", JSON.stringify(ratings));
+            }
+        }
+        //console.log(ratingGiven);
         
-    }
+    });    
+    } 
 }
 
-getHeroInfo();
-
-//console.log(superheroes);
-//console.log(superheroesArray.superheroes.length); 
-
-
+getHeroInfoAndSetRating();
