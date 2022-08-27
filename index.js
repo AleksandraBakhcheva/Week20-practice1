@@ -12,7 +12,6 @@ let superheroes = '{ "superheroes" : [' +
 '{"picture": "https://n1s1.hsmedia.ru/34/93/39/3493392c94fc2ae0552ef9c7e87f2617/728x382_1_cc2a743fd686b7b2e256c062966bb465@1034x543_0xac120002_2692921231540468872.jpg", "name": "Дэдпул", "universe": "Вселенная: Marvel Comics", "alter": "Альтер эго: Уэйд Уинстон Уилсон", "occupation": "Род деятельности: антигерой, наемник", "friends": "Друзья: частично Мстители, Человек-паук, Росомаха", "superpowers": "Суперсилы: высокий болевой порог, регенерация и бессмертие, сверхчеловеческая иммунная система", "description": "Подробнее: как и Росомаха из Людей Икс, Дэдпул был подвергнут опытам по программе «Оружие Икс». Ученые попытались исцелить его рак, привив его клеткам способность к регенерации. Как и всегда в комиксах, что-то пошло не так, и Дэдпул остался изуродованным и психически нестабильным. Это единственный супергерой из списка, который однозначно не на стороне добра. Дэдпул наслаждается насилием. Первоначально появившись в основной Вселенной Marvel, он получил альтернативные варианты в других реальностях Мультивселенной. Что оставалось неизменным — его циничное, черное чувство юмора: за него Дэдпула прозвали «Болтливым наемником»."} ]}';
 
 let superheroesArray = JSON.parse(superheroes);
-let ratings = [];
 
 let title = document.createElement("h1");
 title.textContent = "Все, что надо знать о 10 крутейших супергероях";
@@ -30,7 +29,7 @@ function getHeroInfoAndSetRating() {
         img.classList.add("picture");
         let item = document.createElement("div");
         let rating = document.createElement("form");
-        rating.innerHTML += `<div><p>поставьте рейтинг по шкале от 1 до 10:</p><input type="radio" name=${i} id="rat1" value="rating1"><label for="rat1"></label><input type="radio" name=${i} id="rat2" value="rating2"><label for="rat2"></label><input  type="radio" name=${i} id="rat3" value="rating3"><label for="rat3"></label><input type="radio" name=${i} id="rat4" value="rating4"><label for="rat4"></label><input type="radio" name=${i} id="rat5" value="rating5"><label for="rat5"></label><input type="radio" name=${i} id="rat6" value="rating6"><label for="rat6"></label><input type="radio" name=${i} id="rat7" value="rating7"><label for="rat7"></label><input type="radio" name=${i} id="rat8" value="rating8"><label for="rat8"></label><input type="radio" name=${i} id="rat9" value="rating9"><label for="rat9"></label><input type="radio" name=${i} id="rat10" value="rating10"><label for="rat10"></label></div><div><button class=button${i} type="submit">Поставить рейтинг</button></div>`;
+        rating.innerHTML += `<div><p>поставьте рейтинг по шкале от 1 до 10:</p><input type="radio" name=${i} id="rat1" value="1"><label for="rat1"></label><input type="radio" name=${i} id="rat2" value="2"><label for="rat2"></label><input  type="radio" name=${i} id="rat3" value="3"><label for="rat3"></label><input type="radio" name=${i} id="rat4" value="4"><label for="rat4"></label><input type="radio" name=${i} id="rat5" value="5"><label for="rat5"></label><input type="radio" name=${i} id="rat6" value="6"><label for="rat6"></label><input type="radio" name=${i} id="rat7" value="7"><label for="rat7"></label><input type="radio" name=${i} id="rat8" value="8"><label for="rat8"></label><input type="radio" name=${i} id="rat9" value="9"><label for="rat9"></label><input type="radio" name=${i} id="rat10" value="10"><label for="rat10"></label></div><div><button class=button${i} type="submit">Поставить рейтинг</button></div>`;
         img.src += superheroesArray.superheroes[i].picture;
         item.innerHTML += superheroesArray.superheroes[i].name + "</br>" + superheroesArray.superheroes[i].universe + "</br>" + superheroesArray.superheroes[i].alter + "</br>" + superheroesArray.superheroes[i].occupation + "</br>" + superheroesArray.superheroes[i].friends + "</br>" + superheroesArray.superheroes[i].superpowers + "</br>" + superheroesArray.superheroes[i].description + "</br>";
         document.querySelector(".box" + i).appendChild(img);
@@ -38,19 +37,22 @@ function getHeroInfoAndSetRating() {
         document.querySelector(".box" + i).appendChild(rating);
         let form = document.querySelector(".button" + i);
         form.addEventListener("click", function(event) {
-        event.preventDefault();
-        let ratingGiven = document.querySelectorAll("input[name=" + "'" + i + "'" + "]");
-        for (let n of ratingGiven) {
-            if (n.checked) {
-            console.log(n.value);
-            ratings.push(n.value);
-            localStorage.setItem("rating", JSON.stringify(ratings));
-            }
-        }
-        //console.log(ratingGiven);
-        
+            event.preventDefault();
+            let ratingGiven = document.querySelectorAll("input[name=" + "'" + i + "'" + "]");
+            console.log(ratingGiven);
+            for (let j = 0; j < ratingGiven.length; j++) {
+                if(ratingGiven[j].checked) {
+                    localStorage.setItem("rating", ratingGiven[j].value);
+                    console.log(ratingGiven[j].value);
+                    break;
+    }}
     });    
-    } 
+    }
+    
+/* document.addEventListener("DOMContentLoaded", function(event) {
+        let ratingGiven = document.querySelectorAll("input[name=" + "'" + i + "'" + "]");
+        let checked = localStorage.getItem("rating");
+        ratingGiven[checked].checked = true; }); */
 }
 
 getHeroInfoAndSetRating();
