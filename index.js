@@ -23,7 +23,7 @@ document.body.append(div);
 function getHeroInfoAndSetRating() {
     for(let i = 0; i < 10; i++) {
         let box = document.createElement("div");
-        box.classList.add("box" + i);
+        box.classList.add("item", "box" + i);
         document.querySelector(".container").appendChild(box);
         let img = document.createElement("img");
         img.classList.add("picture");
