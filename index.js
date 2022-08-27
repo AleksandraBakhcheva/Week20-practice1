@@ -47,12 +47,12 @@ function getHeroInfoAndSetRating() {
                     break;
     }}
     });    
-    }
+    }}
     
 /* document.addEventListener("DOMContentLoaded", function(event) {
         let ratingGiven = document.querySelectorAll("input[name=" + "'" + i + "'" + "]");
         let checked = localStorage.getItem("rating");
         ratingGiven[checked].checked = true; }); */
-}
+
 
 getHeroInfoAndSetRating();
