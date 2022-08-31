@@ -39,20 +39,16 @@ function getHeroInfoAndSetRating() {
         form.addEventListener("click", function(event) {
             event.preventDefault();
             let ratingGiven = document.querySelectorAll("input[name=" + "'" + i + "'" + "]");
-            console.log(ratingGiven);
             for (let j = 0; j < ratingGiven.length; j++) {
                 if(ratingGiven[j].checked) {
-                    localStorage.setItem("rating", ratingGiven[j].value);
-                    console.log(ratingGiven[j].value);
-                    break;
+                    localStorage.setItem(`${ratingGiven[j].name} rating`, ratingGiven[j].value);
     }}
-    });    
-    }}
+    });
+    let ratingGiven1 = document.querySelectorAll("input[name=" + "'" + i + "'" + "]");
+    let checked = localStorage.getItem(`${i} rating`);
+        if (checked !== null) {
+            ratingGiven1[--checked].checked = true;
+        }
+}}
     
-/* document.addEventListener("DOMContentLoaded", function(event) {
-        let ratingGiven = document.querySelectorAll("input[name=" + "'" + i + "'" + "]");
-        let checked = localStorage.getItem("rating");
-        ratingGiven[checked].checked = true; }); */
-
-
 getHeroInfoAndSetRating();
